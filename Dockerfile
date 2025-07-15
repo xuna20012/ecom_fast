@@ -20,17 +20,17 @@ FROM node:18.18.0-alpine AS production
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-
-# Install production dependencies
-RUN npm ci --only=production
+# Install serve globally for serving static files
+RUN npm install -g serve
 
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
 
+# Copy serve configuration
+COPY serve.json ./serve.json
+
 # Expose port
 EXPOSE 3000
 
-# Start the application
-CMD ["npm", "run", "preview"] 
+# Start the application using serve with config
+CMD ["serve", "-s", "dist", "-l", "3000", "-c", "serve.json"] 

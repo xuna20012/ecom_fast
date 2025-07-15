@@ -9,7 +9,7 @@ cmds = [
 ]
 
 [phases.start]
-cmd = "npm run preview"
+cmd = "npx serve -s dist -l 3000"
 
 [static]
 dir = "dist" 
