@@ -31,12 +31,12 @@ export const product: Product = {
   description: `Caméra sans fil et HD: le nettoyeur d'oreille sans fil NATFIRE avec caméra offre une expérience de soin des oreilles sans tracas. Sa caméra HD assure une visualisation claire pour une élimination efficace du cérumen.`,
   stockQuantity: 12,
   images: [
-    '/images/nettoyeur_oreilles.mp4',
-    '/images/1.jpg',
-    '/images/2.jpg',
-    '/images/3.jpg',
-    '/images/4.jpg',
-    '/images/5.jpg'
+    './images/nettoyeur_oreilles.mp4',
+    './images/1.jpg',
+    './images/2.jpg',
+    './images/3.jpg',
+    './images/4.jpg',
+    './images/5.jpg'
   ],
   features: [
     {

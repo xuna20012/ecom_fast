@@ -8,7 +8,7 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <img 
-              src="/images/logoXunaTECH.jpeg" 
+              src="./images/logoXunaTECH.jpeg" 
               alt="XunaTech Logo" 
               className="h-12 w-auto"
             />

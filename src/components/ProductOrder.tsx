@@ -498,15 +498,15 @@ const ProductOrder: React.FC = () => {
                 
                 <div className="mt-6 lg:mt-8">
                   <div className="rounded-lg overflow-hidden">
-                    <video 
-                      src="/images/nettoyeur_oreilles.mp4"
-                      controls
-                      controlsList="nodownload"
-                      muted
-                      autoPlay
-                      className="w-full h-auto"
-                      poster="/images/2.jpg"
-                    />
+                                            <video 
+                          src="./images/nettoyeur_oreilles.mp4"
+                          controls
+                          controlsList="nodownload"
+                          muted
+                          autoPlay
+                          className="w-full h-auto"
+                          poster="./images/2.jpg"
+                        />
                   </div>
                 </div>
               </div>
