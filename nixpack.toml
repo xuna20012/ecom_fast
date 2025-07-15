@@ -2,7 +2,7 @@
 cmds = ["npm run build"]
 
 [phases.install]
-cmds = ["npm ci"]
+cmds = ["npm ci --omit=dev"]
 
 [start]
 cmd = "npm run preview"
