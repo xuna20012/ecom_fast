@@ -26,11 +26,8 @@ RUN npm install -g serve
 # Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
 
-# Copy serve configuration
-COPY serve.json ./serve.json
-
 # Expose port
 EXPOSE 3000
 
-# Start the application using serve with config
-CMD ["serve", "-s", "dist", "-l", "3000", "-c", "serve.json"] 
+# Start the application using serve with SPA support
+CMD ["serve", "-s", "dist", "-l", "3000", "--single"] 
