@@ -5,7 +5,11 @@ cmds = ["npm run build"]
 cmds = ["npm ci"]
 
 [start]
-cmd = "nginx -g 'daemon off;'"
+cmd = "npm run preview"
 
 [variables]
-NODE_ENV = "production" 
+NODE_ENV = "production"
+PORT = "3000"
+
+[providers]
+node = "20" 
