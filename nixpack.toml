@@ -1,0 +1,15 @@
+[variables]
+NODE_VERSION = "18.18.0"
+NPM_CONFIG_PRODUCTION = "false"
+
+[phases.build]
+cmds = [
+  "npm ci",
+  "npm run build"
+]
+
+[phases.start]
+cmd = "npm run preview"
+
+[static]
+dir = "dist" 
