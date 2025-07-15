@@ -4,12 +4,12 @@ NPM_CONFIG_PRODUCTION = "false"
 
 [phases.build]
 cmds = [
-  "npm ci",
+  "npm ci --production=false",
   "npm run build"
 ]
 
 [phases.start]
-cmd = "npx serve -s dist -l 3000 --single"
+cmd = "npm start"
 
 [static]
 dir = "dist" 

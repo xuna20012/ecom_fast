@@ -1,0 +1,12 @@
+version: '1.0'
+name: 'ecom_fast_order'
+build:
+  type: 'node'
+  nodeVersion: '20.19.0'
+  buildCommand: 'npm ci --production=false && npm run build'
+  startCommand: 'serve -s dist -l 3000 --single'
+  outputDirectory: 'dist'
+ports:
+  - 3000
+environment:
+  NODE_ENV: 'production' 

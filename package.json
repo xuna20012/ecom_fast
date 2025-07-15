@@ -12,7 +12,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview --port 3000 --host 0.0.0.0",
-    "serve": "serve -s dist -l 3000 --single"
+    "serve": "serve -s dist -l 3000 --single",
+    "start": "serve -s dist -l 3000 --single"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
