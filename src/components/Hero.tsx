@@ -48,7 +48,7 @@ const Hero: React.FC = () => {
             <div className="relative">
               <div className="absolute -inset-4 bg-blue-500 rounded-full opacity-20 blur-3xl"></div>
               <img 
-                src="./images/2.jpg" 
+                src="/images/2.jpg" 
                 alt="Product showcase" 
                 className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-700 w-full max-w-lg mx-auto"
               />

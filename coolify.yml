@@ -1,12 +1,24 @@
-version: '1.0'
-name: 'ecom_fast_order'
-build:
-  type: 'node'
-  nodeVersion: '20.19.0'
-  buildCommand: 'npm ci --production=false && npm run build'
-  startCommand: 'serve -s dist -l 3000 --single'
-  outputDirectory: 'dist'
-ports:
-  - 3000
-environment:
-  NODE_ENV: 'production' 
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+      - VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
+      - VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=letsencrypt"
+      - "traefik.http.services.app.loadbalancer.server.port=80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s 

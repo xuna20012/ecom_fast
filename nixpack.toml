@@ -1,15 +1,11 @@
-[variables]
-NODE_VERSION = "20.19.0"
-NPM_CONFIG_PRODUCTION = "false"
-
 [phases.build]
-cmds = [
-  "npm ci --production=false",
-  "npm run build"
-]
+cmds = ["npm run build"]
 
-[phases.start]
-cmd = "npm start"
+[phases.install]
+cmds = ["npm ci"]
 
-[static]
-dir = "dist" 
+[start]
+cmd = "nginx -g 'daemon off;'"
+
+[variables]
+NODE_ENV = "production" 
