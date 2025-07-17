@@ -10,21 +10,24 @@ interface OrderData {
 
 export const sendOrderNotification = async (orderData: OrderData): Promise<boolean> => {
   try {
-    const response = await fetch('/api/send-email', {
+    // Utiliser le script PHP sur votre domaine
+    const response = await fetch('https://shop.xunatechai.com/send-email.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      body: JSON.stringify({ orderData }),
+      body: JSON.stringify({
+        orderData: orderData
+      })
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    if (response.ok) {
+      console.log('Email envoyé avec succès via PHP');
+      return true;
+    } else {
+      throw new Error('Erreur lors de l\'envoi via PHP');
     }
-
-    const result = await response.json();
-    console.log('Email envoyé avec succès:', result.message);
-    return true;
   } catch (error) {
     console.error('Erreur lors de l\'envoi de l\'email:', error);
     return false;
