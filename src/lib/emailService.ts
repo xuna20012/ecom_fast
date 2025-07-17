@@ -12,7 +12,7 @@ interface OrderData {
 
 // Configuration EmailJS - Compatible avec Coolify
 const EMAILJS_SERVICE_ID = 'service_xunatech';
-const EMAILJS_TEMPLATE_ID = 'template_order_notification';
+const EMAILJS_TEMPLATE_ID = 'template_order';
 const EMAILJS_PUBLIC_KEY = 'xSiBaB_4kF3cinLuY'; // Clé publique EmailJS
 
 export const sendOrderNotification = async (orderData: OrderData): Promise<boolean> => {
