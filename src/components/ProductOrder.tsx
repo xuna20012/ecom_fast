@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { product } from '../data/product';
 import { supabase } from '../lib/supabase';
+import { sendOrderNotification } from '../lib/emailService';
 
 interface FormData {
   fullName: string;
@@ -242,6 +243,15 @@ const ProductOrder: React.FC = () => {
 
       // Stocker les données de la commande pour le message WhatsApp
       setOrderData(currentOrderData);
+
+      // Envoyer l'email de notification de commande
+      try {
+        await sendOrderNotification(currentOrderData);
+        console.log('Email de notification envoyé avec succès');
+      } catch (emailError) {
+        console.error('Erreur lors de l\'envoi de l\'email de notification:', emailError);
+        // Ne pas interrompre le processus si l'email échoue
+      }
 
       // Reset form and show success dialog
       setFormData({
