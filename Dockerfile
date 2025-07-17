@@ -14,14 +14,17 @@ ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
 # Copy package files
 COPY package*.json ./
 
-# Install ALL dependencies (including devDependencies for build)
-RUN npm ci
+# Copy build script
+COPY build.sh ./
+
+# Make build script executable
+RUN chmod +x build.sh
 
 # Copy source code
 COPY . .
 
-# Build the application
-RUN npm run build
+# Build the application using our script
+RUN ./build.sh
 
 # Production stage
 FROM nginx:alpine
