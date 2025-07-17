@@ -14,14 +14,11 @@ ENV VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
 # Copy package files
 COPY package*.json ./
 
-# Copy build script
-COPY build.sh ./
-
-# Make build script executable
-RUN chmod +x build.sh
-
-# Copy source code
+# Copy source code first
 COPY . .
+
+# Make build script executable (after copying)
+RUN chmod +x build.sh
 
 # Build the application using our script
 RUN ./build.sh
