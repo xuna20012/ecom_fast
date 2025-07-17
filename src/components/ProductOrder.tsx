@@ -36,6 +36,16 @@ interface ReviewFormData {
   comment: string;
 }
 
+interface OrderData {
+  fullName: string;
+  phone: string;
+  address: string;
+  quantity: number;
+  totalPrice: number;
+  productName: string;
+  productPrice: number;
+}
+
 const iconMap = {
   truck: Truck,
   'credit-card': CreditCard,
@@ -55,6 +65,7 @@ const ProductOrder: React.FC = () => {
     address: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [orderData, setOrderData] = useState<OrderData | null>(null);
   
   // États pour le système d'avis
   const [reviews, setReviews] = useState<ReviewData[]>([]);
@@ -202,6 +213,16 @@ const ProductOrder: React.FC = () => {
     setIsSubmitting(true);
 
     try {
+      const currentOrderData = {
+        fullName: formData.fullName,
+        phone: formData.phone,
+        address: formData.address,
+        quantity: quantity,
+        totalPrice: totalPrice,
+        productName: product.name,
+        productPrice: product.price
+      };
+
       const { error } = await supabase
         .from('orders')
         .insert([
@@ -218,6 +239,9 @@ const ProductOrder: React.FC = () => {
         ]);
 
       if (error) throw error;
+
+      // Stocker les données de la commande pour le message WhatsApp
+      setOrderData(currentOrderData);
 
       // Reset form and show success dialog
       setFormData({
@@ -246,6 +270,33 @@ const ProductOrder: React.FC = () => {
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('fr-FR').format(price) + ' FCFA';
+  };
+
+  // Fonction pour générer le message WhatsApp personnalisé
+  const generateWhatsAppMessage = () => {
+    if (!orderData) return '';
+
+    const message = `Bonjour,
+
+Je viens de passer une commande sur votre site et j'aimerais confirmer les détails :
+
+📦 *Détails de la commande:*
+• Produit: ${orderData.productName}
+• Quantité: ${orderData.quantity}
+• Prix unitaire: ${formatPrice(orderData.productPrice)}
+• Total: ${formatPrice(orderData.totalPrice)}
+
+👤 *Informations client:*
+• Nom: ${orderData.fullName}
+• Téléphone: ${orderData.phone}
+• Adresse: ${orderData.address}
+
+Merci de me confirmer la commande et les détails de livraison.
+
+Cordialement,
+${orderData.fullName}`;
+
+    return encodeURIComponent(message);
   };
 
   return (
@@ -778,7 +829,7 @@ const ProductOrder: React.FC = () => {
               </a>
 
               <a
-                href="https://wa.me/221789282535"
+                href={`https://wa.me/221789282535${orderData ? `?text=${generateWhatsAppMessage()}` : ''}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center px-4 py-3 bg-[#25D366] text-white rounded-lg hover:bg-[#25D366]/90 transition duration-300 font-medium"
