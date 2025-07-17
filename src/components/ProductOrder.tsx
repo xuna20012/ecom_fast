@@ -364,7 +364,6 @@ const ProductOrder: React.FC = () => {
                     controls
                     controlsList="nodownload"
                     muted
-                    autoPlay
                     className="w-full h-full object-cover"
                     poster={product.images[1]}
                   />
@@ -564,7 +563,6 @@ const ProductOrder: React.FC = () => {
                       controls
                       controlsList="nodownload"
                       muted
-                      autoPlay
                       className="w-full h-auto"
                       poster="/images/2.jpg"
                     />
