@@ -276,25 +276,17 @@ const ProductOrder: React.FC = () => {
   const generateWhatsAppMessage = () => {
     if (!orderData) return '';
 
-    const message = `Bonjour,
-
-Je viens de passer une commande sur votre site et j'aimerais confirmer les détails :
-
+    const message = `Bonjour, je viens de passer une commande sur votre site :
 📦 *Détails de la commande:*
 • Produit: ${orderData.productName}
 • Quantité: ${orderData.quantity}
 • Prix unitaire: ${formatPrice(orderData.productPrice)}
 • Total: ${formatPrice(orderData.totalPrice)}
-
-👤 *Informations client:*
+👤 *Mes informations:*
 • Nom: ${orderData.fullName}
 • Téléphone: ${orderData.phone}
 • Adresse: ${orderData.address}
-
-Merci de me confirmer la commande et les détails de livraison.
-
-Cordialement,
-${orderData.fullName}`;
+`;
 
     return encodeURIComponent(message);
   };
