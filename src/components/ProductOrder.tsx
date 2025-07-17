@@ -224,7 +224,7 @@ const ProductOrder: React.FC = () => {
         productPrice: product.price
       };
 
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('orders')
         .insert([
           {
@@ -237,16 +237,26 @@ const ProductOrder: React.FC = () => {
             product_price: product.price,
             status: 'pending'
           }
-        ]);
+        ])
+        .select();
 
       if (error) throw error;
 
+      // Récupérer l'ID de la commande créée
+      const orderId = data && data.length > 0 ? data[0].id : null;
+
+      // Ajouter l'ID aux données de la commande
+      const completeOrderData = {
+        ...currentOrderData,
+        id: orderId
+      };
+
       // Stocker les données de la commande pour le message WhatsApp
-      setOrderData(currentOrderData);
+      setOrderData(completeOrderData);
 
       // Envoyer l'email de notification de commande
       try {
-        await sendOrderNotification(currentOrderData);
+        await sendOrderNotification(completeOrderData);
         console.log('Email de notification envoyé avec succès');
       } catch (emailError) {
         console.error('Erreur lors de l\'envoi de l\'email de notification:', emailError);
