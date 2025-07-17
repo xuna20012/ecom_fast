@@ -12,7 +12,7 @@ interface OrderData {
 
 // Configuration EmailJS - Compatible avec Coolify
 const EMAILJS_SERVICE_ID = 'service_xunatech';
-const EMAILJS_TEMPLATE_ID = 'template_order';
+const EMAILJS_TEMPLATE_ID = '9aorm2j'; // Template ID réel d'EmailJS
 const EMAILJS_PUBLIC_KEY = 'xSiBaB_4kF3cinLuY'; // Clé publique EmailJS
 
 export const sendOrderNotification = async (orderData: OrderData): Promise<boolean> => {
@@ -22,7 +22,6 @@ export const sendOrderNotification = async (orderData: OrderData): Promise<boole
 
     // Préparer les données pour l'email
     const templateParams = {
-      to_email: 'cheikhounafall2023@gmail.com',
       from_name: 'Nouvelle Commande XunaTech',
       reply_to: 'new-order@xunatech.com',
       
