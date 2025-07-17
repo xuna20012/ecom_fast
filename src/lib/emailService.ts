@@ -26,8 +26,8 @@ export const sendOrderNotification = async (orderData: OrderData): Promise<boole
       from_name: 'Nouvelle Commande XunaTech',
       reply_to: 'new-order@xunatech.com',
       
-      // ID de la commande
-      order_id: orderData.orderId,
+      // ID de la commande (format lisible)
+      order_id: `CMD${orderData.orderId.substring(0, 8).toUpperCase()}`,
       
       // Détails de la commande
       product_name: orderData.productName,
@@ -52,7 +52,7 @@ export const sendOrderNotification = async (orderData: OrderData): Promise<boole
       // Message principal
       message: `🎉 NOUVELLE COMMANDE REÇUE !
 
-📋 NUMÉRO DE COMMANDE: ${orderData.orderId}
+📋 NUMÉRO DE COMMANDE: CMD${orderData.orderId.substring(0, 8).toUpperCase()}
 
 📦 DÉTAILS DE LA COMMANDE:
 • Produit: ${orderData.productName}
