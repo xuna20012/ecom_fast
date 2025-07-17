@@ -1,7 +1,6 @@
 import emailjs from '@emailjs/browser';
 
 interface OrderData {
-  id?: string;
   fullName: string;
   phone: string;
   address: string;
@@ -9,6 +8,7 @@ interface OrderData {
   totalPrice: number;
   productName: string;
   productPrice: number;
+  orderId: string;
 }
 
 // Configuration EmailJS - Compatible avec Coolify
@@ -27,7 +27,7 @@ export const sendOrderNotification = async (orderData: OrderData): Promise<boole
       reply_to: 'new-order@xunatech.com',
       
       // ID de la commande
-      order_id: orderData.id || 'Non disponible',
+      order_id: orderData.orderId,
       
       // Détails de la commande
       product_name: orderData.productName,
@@ -52,7 +52,7 @@ export const sendOrderNotification = async (orderData: OrderData): Promise<boole
       // Message principal
       message: `🎉 NOUVELLE COMMANDE REÇUE !
 
-🆔 ID DE LA COMMANDE: ${orderData.id || 'Non disponible'}
+📋 NUMÉRO DE COMMANDE: ${orderData.orderId}
 
 📦 DÉTAILS DE LA COMMANDE:
 • Produit: ${orderData.productName}
